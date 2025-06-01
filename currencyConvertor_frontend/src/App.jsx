@@ -21,6 +21,7 @@ function App() {
 
   const convert = () => {
     setConvertedAmount(amount * currencyData[to]);
+    alert(`Hooray! ${from.toUpperCase()} got converted to ${to.toUpperCase()}`);
   };
 
   return (

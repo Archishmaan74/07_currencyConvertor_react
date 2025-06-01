@@ -9,9 +9,13 @@ function useCurrencyData(currency) {
     )
       .then((res) => res.json())
       .then((res) => setData(res[currency]));
-
-    console.log(data);
   }, [currency]);
+
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      console.log("Currencies data fetched: ", data);
+    }
+  }, [data]);
   return data;
 }
 
