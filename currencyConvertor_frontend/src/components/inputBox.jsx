@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 function InputBox({
   label,
   amount,
@@ -9,17 +11,24 @@ function InputBox({
   currencyDisabled = false,
   className = "",
 }) {
+  const inputAmountId = useId();
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
       <div className="w-1/2">
-        <label className="text-black/40 mb-2 inline-block">{label}</label>
+        <label
+          htmlFor={inputAmountId}
+          className="text-black/40 mb-2 inline-block"
+        >
+          {label}
+        </label>
         <input
+          id={inputAmountId}
           className="outline-none w-full bg-transparent py-1.5"
           type="number"
           placeholder="Amount"
           disabled={amountDisabled}
           value={amount}
-          onChange={handleAmountChange && handleAmountChange}
+          onChange={(e) => handleAmountChange?.(e.target.value)}
         />
       </div>
       <div className="w-1/2 flex flex-wrap justify-end text-right">
@@ -27,7 +36,7 @@ function InputBox({
         <select
           className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
           value={selectCurrency}
-          onChange={handleCurrencyChange && handleCurrencyChange}
+          onChange={(e) => handleCurrencyChange?.(e.target.value)}
           disabled={currencyDisabled}
         >
           {currencyOptions.map((currency) => (
